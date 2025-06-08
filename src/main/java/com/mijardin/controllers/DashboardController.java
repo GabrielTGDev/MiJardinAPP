@@ -1,93 +1,108 @@
 package com.mijardin.controllers;
 
-import com.mijardin.services.FertilizacionService;
+import com.mijardin.entities.Planta;
 import com.mijardin.services.PlantaService;
-import com.mijardin.services.RiegoService;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class DashboardController {
+
     private final PlantaService plantaService;
-    private final RiegoService riegoService;
-    private final FertilizacionService fertilizacionService;
 
     @FXML
-    private Label totalPlantasLabel;
+    private Label plantsNeedingWateringLabel;
 
     @FXML
-    private Label plantasRiegoLabel;
+    private Label plantsNeedingFertilizationLabel;
 
     @FXML
-    private Label plantasFertilizacionLabel;
+    private TableView<Planta> wateringTable;
 
     @FXML
-    private Label mensajeEstadoLabel;
+    private TableColumn<Planta, String> wateringPlantNameColumn;
 
     @FXML
-    private ListView<String> riegosPendientesList;
+    private TableColumn<Planta, LocalDate> wateringDateColumn;
 
     @FXML
-    private ListView<String> fertilizacionesPendientesList;
+    private TableView<Planta> fertilizationTable;
 
-    public DashboardController(PlantaService plantaService, RiegoService riegoService, FertilizacionService fertilizacionService) {
+    @FXML
+    private TableColumn<Planta, String> fertilizationPlantNameColumn;
+
+    @FXML
+    private TableColumn<Planta, LocalDate> fertilizationDateColumn;
+
+    public DashboardController(PlantaService plantaService) {
         this.plantaService = plantaService;
-        this.riegoService = riegoService;
-        this.fertilizacionService = fertilizacionService;
     }
 
     @FXML
     public void initialize() {
-        cargarResumen();
-        cargarAlertas();
+        cargarDatosDashboard();
     }
 
-    private void cargarResumen() {
-        int totalPlantas = plantaService.listarPlantas().size();
-        int plantasRiego = riegoService.listarRiegos().size(); // Filtrar por riegos pendientes
-        int plantasFertilizacion = fertilizacionService.listarFertilizaciones().size(); // Filtrar por fertilizaciones pendientes
-
-        totalPlantasLabel.setText(String.valueOf(totalPlantas));
-        plantasRiegoLabel.setText(String.valueOf(plantasRiego));
-        plantasFertilizacionLabel.setText(String.valueOf(plantasFertilizacion));
-
-        if (plantasRiego == 0 && plantasFertilizacion == 0) {
-            mensajeEstadoLabel.setText("¡Todo en orden, tus plantas están felices!");
-        } else {
-            mensajeEstadoLabel.setText("¡Atención! Hay tareas pendientes.");
-        }
+    /**
+     * Carga los datos iniciales del dashboard, incluyendo contadores y tablas.
+     */
+    private void cargarDatosDashboard() {
+        actualizarContadores();
+        cargarTablas();
     }
 
-    private void cargarAlertas() {
-        List<String> riegosPendientes = List.of("Planta 1 - Hoy", "Planta 2 - Mañana"); // Simulación
-        List<String> fertilizacionesPendientes = List.of("Planta 3 - En 3 días"); // Simulación
+    /**
+     * Actualiza los contadores de plantas que necesitan riego y fertilización hoy.
+     */
+    private void actualizarContadores() {
+        // Actualizar etiquetas con el conteo de plantas que necesitan riego y fertilización hoy
+        long plantasRiegoHoy = plantaService.listarPlantas().stream()
+                .filter(planta -> planta.getUltimoRiegoFecha() != null &&
+                        planta.getUltimoRiegoFecha().plusDays(planta.getFrecuenciaRiegoDias()).isEqual(LocalDate.now()))
+                .count();
 
-        ObservableList<String> riegosObservable = FXCollections.observableArrayList(riegosPendientes);
-        ObservableList<String> fertilizacionesObservable = FXCollections.observableArrayList(fertilizacionesPendientes);
+        long plantasFertilizacionHoy = plantaService.listarPlantas().stream()
+                .filter(planta -> planta.getUltimaFertilizacionFecha() != null &&
+                        planta.getUltimaFertilizacionFecha().plusDays(planta.getFrecuenciaFertilizacionDias()).isEqual(LocalDate.now()))
+                .count();
 
-        riegosPendientesList.setItems(riegosObservable);
-        fertilizacionesPendientesList.setItems(fertilizacionesObservable);
+        plantsNeedingWateringLabel.setText(String.valueOf(plantasRiegoHoy));
+        plantsNeedingFertilizationLabel.setText(String.valueOf(plantasFertilizacionHoy));
     }
 
-    private void mostrarAlerta(String titulo, String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(titulo);
-        alert.setContentText(mensaje);
-        alert.showAndWait();
-    }
+    /**
+     * Carga las tablas de riego y fertilización con las plantas que necesitan atención hoy.
+     */
+    private void cargarTablas() {
+        // Inicializamos las columnas de las tablas
+        wateringPlantNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+        wateringDateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(
+                cellData.getValue().getUltimoRiegoFecha().plusDays(cellData.getValue().getFrecuenciaRiegoDias())));
 
-    @FXML
-    private void crearPlanta() {
-        mostrarAlerta("Añadir Nueva Planta", "Funcionalidad para añadir una nueva planta aún no implementada.");
-    }
+        // Inicializamos las columnas de la tabla de fertilización
+        fertilizationPlantNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+        fertilizationDateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(
+                cellData.getValue().getUltimaFertilizacionFecha().plusDays(cellData.getValue().getFrecuenciaFertilizacionDias())));
 
-    @FXML
-    private void verPlantas() {
-        mostrarAlerta("Ver Todas las Plantas", "Funcionalidad para ver todas las plantas aún no implementada.");
+        // Cargamos las plantas que necesitan riego y fertilización hoy
+        List<Planta> plantas = plantaService.listarPlantas();
+
+        List<Planta> plantasRiego = plantas.stream()
+                .filter(planta -> planta.getUltimoRiegoFecha() != null &&
+                        planta.getUltimoRiegoFecha().plusDays(planta.getFrecuenciaRiegoDias()).isEqual(LocalDate.now()))
+                .toList();
+
+        List<Planta> plantasFertilizacion = plantas.stream()
+                .filter(planta -> planta.getUltimaFertilizacionFecha() != null &&
+                        planta.getUltimaFertilizacionFecha().plusDays(planta.getFrecuenciaFertilizacionDias()).isEqual(LocalDate.now()))
+                .toList();
+
+        wateringTable.setItems(FXCollections.observableArrayList(plantasRiego));
+        fertilizationTable.setItems(FXCollections.observableArrayList(plantasFertilizacion));
     }
 }
