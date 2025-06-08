@@ -36,5 +36,5 @@ build/
 
 ### Mac OS ###
 .DS_Store
-/out/artifacts/MiJardin_1_1_jar/MiJardin_1_1.jar
+/out/artifacts/MiJardin_jar/MiJardin.jar
 /src/main/resources/META-INF/MANIFEST.MF

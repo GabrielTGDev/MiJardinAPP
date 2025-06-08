@@ -1,7 +1,9 @@
-module com.mijardin_1_1 {
+module com.mijardin {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+
+    requires java.naming;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
@@ -11,7 +13,8 @@ module com.mijardin_1_1 {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires jakarta.persistence;
+    requires org.hibernate.orm.core;
 
-    opens com.mijardin_1_1 to javafx.fxml;
-    exports com.mijardin_1_1;
+    opens com.mijardin to javafx.fxml;
+    exports com.mijardin;
 }
