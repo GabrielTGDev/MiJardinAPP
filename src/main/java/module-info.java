@@ -10,6 +10,7 @@ module com.mijardin_1_1 {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires jakarta.persistence;
 
     opens com.mijardin_1_1 to javafx.fxml;
     exports com.mijardin_1_1;

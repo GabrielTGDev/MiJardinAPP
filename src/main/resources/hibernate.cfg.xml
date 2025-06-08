@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <!-- Conexión a MySQL -->
+    <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/jardin?useSSL=false&amp;serverTimezone=UTC</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password"></property>
+
+    <!-- Dialecto de MySQL -->
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+    <!-- Mostrar consultas SQL -->
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.format_sql">true</property>
+
+    <!-- Manejo del esquema -->
+    <property name="hibernate.hbm2ddl.auto">validate</property>
+
+    <!-- Clases anotadas -->
+    <!-- Aquí se incluirán las clases Entity -->
+    <mapping class="com.mijardin.entities.Fertilizacion"/>
+    <mapping class="com.mijardin.entities.Planta"/>
+    <mapping class="com.mijardin.entities.Riego"/>
+    <mapping class="com.mijardin.entities.Ubicacion"/>
+  </session-factory>
+</hibernate-configuration>
