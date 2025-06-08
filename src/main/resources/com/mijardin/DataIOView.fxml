@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.mijardin.controllers.DataIOController">
+    <top>
+        <ToolBar>
+            <Button text="Importar Datos" onAction="#importarDatos"/>
+            <Button text="Exportar Datos" onAction="#exportarDatos"/>
+        </ToolBar>
+    </top>
+    <center>
+        <VBox spacing="10" alignment="CENTER">
+            <Label text="Seleccione una acción para importar o exportar datos del sistema."/>
+        </VBox>
+    </center>
+</BorderPane>

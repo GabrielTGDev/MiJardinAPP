@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.mijardin.controllers.RiegoController">
+    <top>
+        <ToolBar>
+            <Button text="Agregar Riego" onAction="#crearRiego"/>
+            <Button text="Editar Riego" onAction="#actualizarRiego"/>
+            <Button text="Eliminar Riego" onAction="#eliminarRiego"/>
+        </ToolBar>
+    </top>
+    <center>
+        <TableView fx:id="tablaRiegos">
+            <columns>
+                <TableColumn text="ID" fx:id="columnaId"/>
+                <TableColumn text="Fecha" fx:id="columnaFecha"/>
+                <TableColumn text="Hora" fx:id="columnaHora"/>
+                <TableColumn text="Cantidad (ml)" fx:id="columnaCantidad"/>
+                <TableColumn text="Observaciones" fx:id="columnaObservaciones"/>
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>

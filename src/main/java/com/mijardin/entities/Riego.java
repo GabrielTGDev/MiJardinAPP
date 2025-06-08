@@ -28,7 +28,7 @@ public class Riego {
     private BigDecimal cantidadMl;
 
     @Lob
-    @Column(name = "observaciones")
+    @Column(name = "observaciones", columnDefinition = "TEXT")
     private String observaciones;
 
     public Integer getId() {

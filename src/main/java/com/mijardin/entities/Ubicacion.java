@@ -1,7 +1,6 @@
 package com.mijardin.entities;
 
 import jakarta.persistence.*;
-
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -17,18 +16,23 @@ public class Ubicacion {
     private String nombre;
 
     @Lob
-    @Column(name = "descripcion")
+    @Column(name = "descripcion", columnDefinition = "TEXT")
     private String descripcion;
 
-    @Lob
+    @Enumerated(EnumType.STRING)
     @Column(name = "tipo", nullable = false)
-    private String tipo;
+    private TipoUbicacion tipo;
 
     @Column(name = "luz")
     private Integer luz;
 
     @OneToMany(mappedBy = "ubicacion")
     private Set<Planta> plantas = new LinkedHashSet<>();
+
+    public enum TipoUbicacion {
+        INTERIOR,
+        EXTERIOR
+    }
 
     public Integer getId() {
         return id;
@@ -54,11 +58,11 @@ public class Ubicacion {
         this.descripcion = descripcion;
     }
 
-    public String getTipo() {
+    public TipoUbicacion getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoUbicacion tipo) {
         this.tipo = tipo;
     }
 
@@ -77,5 +81,4 @@ public class Ubicacion {
     public void setPlantas(Set<Planta> plantas) {
         this.plantas = plantas;
     }
-
 }

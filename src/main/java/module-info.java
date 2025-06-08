@@ -16,5 +16,9 @@ module com.mijardin {
     requires org.hibernate.orm.core;
 
     opens com.mijardin to javafx.fxml;
+    opens com.mijardin.controllers to javafx.fxml;
+    opens com.mijardin.entities to org.hibernate.orm.core;
+
     exports com.mijardin;
+    exports com.mijardin.controllers;
 }

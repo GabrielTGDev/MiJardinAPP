@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.mijardin.controllers.UbicacionController">
+    <top>
+        <ToolBar>
+            <Button text="Agregar Ubicación" onAction="#crearUbicacion"/>
+            <Button text="Editar Ubicación" onAction="#actualizarUbicacion"/>
+            <Button text="Eliminar Ubicación" onAction="#eliminarUbicacion"/>
+        </ToolBar>
+    </top>
+    <center>
+        <TableView fx:id="tablaUbicaciones">
+            <columns>
+                <TableColumn text="ID" fx:id="columnaId"/>
+                <TableColumn text="Nombre" fx:id="columnaNombre"/>
+                <TableColumn text="Descripción" fx:id="columnaDescripcion"/>
+                <TableColumn text="Tipo" fx:id="columnaTipo"/>
+                <TableColumn text="Luz" fx:id="columnaLuz"/>
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>

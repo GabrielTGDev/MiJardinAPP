@@ -43,7 +43,7 @@ public class Planta {
     private LocalDate ultimaFertilizacionFecha;
 
     @Lob
-    @Column(name = "notas")
+    @Column(name = "notas", columnDefinition = "TEXT")
     private String notas;
 
     @Column(name = "imagen_url")
