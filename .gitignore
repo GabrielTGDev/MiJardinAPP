@@ -38,3 +38,4 @@ build/
 .DS_Store
 /out/artifacts/MiJardin_jar/MiJardin.jar
 /src/main/resources/META-INF/MANIFEST.MF
+/out/artifacts/MiJardin_1_1_jar/MiJardin_1_1.jar
