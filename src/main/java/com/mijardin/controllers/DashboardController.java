@@ -63,12 +63,20 @@ public class DashboardController {
         // Actualizar etiquetas con el conteo de plantas que necesitan riego y fertilización hoy
         long plantasRiegoHoy = plantaService.listarPlantas().stream()
                 .filter(planta -> planta.getUltimoRiegoFecha() != null &&
-                        planta.getUltimoRiegoFecha().plusDays(planta.getFrecuenciaRiegoDias()).isEqual(LocalDate.now()))
+                        (
+                                planta.getUltimoRiegoFecha().plusDays(planta.getFrecuenciaRiegoDias()).isEqual(LocalDate.now())
+                                || planta.getUltimoRiegoFecha().plusDays(planta.getFrecuenciaRiegoDias()).isBefore(LocalDate.now())
+                        )
+                )
                 .count();
 
         long plantasFertilizacionHoy = plantaService.listarPlantas().stream()
                 .filter(planta -> planta.getUltimaFertilizacionFecha() != null &&
-                        planta.getUltimaFertilizacionFecha().plusDays(planta.getFrecuenciaFertilizacionDias()).isEqual(LocalDate.now()))
+                        (
+                                planta.getUltimaFertilizacionFecha().plusDays(planta.getFrecuenciaFertilizacionDias()).isEqual(LocalDate.now())
+                                || planta.getUltimaFertilizacionFecha().plusDays(planta.getFrecuenciaFertilizacionDias()).isBefore(LocalDate.now())
+                        )
+                )
                 .count();
 
         plantsNeedingWateringLabel.setText(String.valueOf(plantasRiegoHoy));
@@ -94,12 +102,12 @@ public class DashboardController {
 
         List<Planta> plantasRiego = plantas.stream()
                 .filter(planta -> planta.getUltimoRiegoFecha() != null &&
-                        planta.getUltimoRiegoFecha().plusDays(planta.getFrecuenciaRiegoDias()).isEqual(LocalDate.now()))
+                        planta.getUltimoRiegoFecha().plusDays(planta.getFrecuenciaRiegoDias()).isAfter(LocalDate.now()))
                 .toList();
 
         List<Planta> plantasFertilizacion = plantas.stream()
                 .filter(planta -> planta.getUltimaFertilizacionFecha() != null &&
-                        planta.getUltimaFertilizacionFecha().plusDays(planta.getFrecuenciaFertilizacionDias()).isEqual(LocalDate.now()))
+                        planta.getUltimaFertilizacionFecha().plusDays(planta.getFrecuenciaFertilizacionDias()).isAfter(LocalDate.now()))
                 .toList();
 
         wateringTable.setItems(FXCollections.observableArrayList(plantasRiego));
