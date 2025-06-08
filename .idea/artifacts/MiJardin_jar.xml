@@ -1,8 +1,8 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="MiJardin_1_1:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/MiJardin_1_1_jar</output-path>
+  <artifact type="jar" name="MiJardin:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MiJardin_jar</output-path>
     <root id="archive" name="MiJardin_1_1.jar">
-      <element id="module-output" name="MiJardin_1_1" />
+      <element id="module-output" name="MiJardin" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/21.0.7/javafx-controls-21.0.7-win.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/eu/hansolo/fx/countries/21.0.3/countries-21.0.3.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/21.0.7/javafx-graphics-21.0.7.jar" path-in-jar="/" />
