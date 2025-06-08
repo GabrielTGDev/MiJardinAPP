@@ -23,7 +23,7 @@ public class Planta {
     @Column(name = "fecha_adquisicion")
     private LocalDate fechaAdquisicion;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ubicacion_id")
     private Ubicacion ubicacion;
 

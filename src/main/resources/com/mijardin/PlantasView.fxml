@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane
+        xmlns:fx="http://javafx.com/fxml"
+        fx:controller="com.mijardin.controllers.PlantaController"
+
+>
+    <top>
+        <HBox spacing="10" style="-fx-background-color: #e6f4ef; -fx-padding: 10;">
+            <HBox spacing="10">
+                <Label text="🌱" style="-fx-font-size: 24px;" />
+                <Label text="Mi Jardin" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+            </HBox>
+            <HBox spacing="20" alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                <Hyperlink text="Inicio" />
+                <Hyperlink text="Plantas" />
+                <Hyperlink text="Tareas" />
+                <Hyperlink text="Configuración" />
+            </HBox>
+        </HBox>
+    </top>
+    <center>
+        <VBox spacing="10" style="-fx-padding: 20;">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Lista de plantas" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #121714;"/>
+                <Button text="Añadir planta" style="-fx-background-color: #ebefed; -fx-text-fill: #121714;"/>
+            </HBox>
+            <TableView fx:id="tablaPlantas" style="-fx-border-color: #d7e0db; -fx-background-color: #f9fbfa;">
+                <columns>
+                    <TableColumn text="Nombre" fx:id="colNombre"/>
+                    <TableColumn text="Especie" fx:id="colEspecie"/>
+                    <TableColumn text="Adiquisición" fx:id="colFechaAdquisicion"/>
+                    <TableColumn text="ubicación" fx:id="colUbicacion"/>
+                    <TableColumn text="Último riego" fx:id="colUltimoRiego"/>
+                    <TableColumn text="Próximo riego" fx:id="colProximoRiego"/>
+                    <TableColumn text="Última fertilizacion" fx:id="colUltimaFertilizacion"/>
+                    <TableColumn text="Próxima fertilización" fx:id="colProximaFertilizacion"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>

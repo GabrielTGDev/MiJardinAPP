@@ -17,7 +17,7 @@ module com.mijardin {
 
     opens com.mijardin to javafx.fxml;
     opens com.mijardin.controllers to javafx.fxml;
-    opens com.mijardin.entities to org.hibernate.orm.core;
+    opens com.mijardin.entities to org.hibernate.orm.core, javafx.base;
 
     exports com.mijardin;
     exports com.mijardin.controllers;

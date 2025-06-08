@@ -30,8 +30,8 @@ public class Ubicacion {
     private Set<Planta> plantas = new LinkedHashSet<>();
 
     public enum TipoUbicacion {
-        INTERIOR,
-        EXTERIOR
+        interior,
+        exterior;
     }
 
     public Integer getId() {

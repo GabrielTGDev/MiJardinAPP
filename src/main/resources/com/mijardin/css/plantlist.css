@@ -1,0 +1,16 @@
+.root {
+    -fx-font-family: "Space Grotesk", "Noto Sans", sans-serif;
+    -fx-background-color: #f8fcfa;
+}
+
+.table-view {
+    -fx-border-color: #cde9df;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.button {
+    -fx-background-color: #ebefed;
+    -fx-text-fill: #121714;
+    -fx-font-weight: bold;
+}

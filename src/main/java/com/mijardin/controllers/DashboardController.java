@@ -6,7 +6,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -111,6 +114,53 @@ public class DashboardController {
                 .toList();
 
         wateringTable.setItems(FXCollections.observableArrayList(plantasRiego));
+        wateringTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        wateringTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         fertilizationTable.setItems(FXCollections.observableArrayList(plantasFertilizacion));
+        fertilizationTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        fertilizationTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+        // Agregar manejador de doble clic para wateringTable
+        wateringTable.setRowFactory(tv -> {
+            TableRow<Planta> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && !row.isEmpty()) {
+                    Planta plantaSeleccionada = row.getItem();
+                    abrirDetallesPlanta(plantaSeleccionada);
+                }
+            });
+            return row;
+        });
+
+        // Agregar manejador de doble clic para fertilizationTable
+        fertilizationTable.setRowFactory(tv -> {
+            TableRow<Planta> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && !row.isEmpty()) {
+                    Planta plantaSeleccionada = row.getItem();
+                    abrirDetallesPlanta(plantaSeleccionada);
+                }
+            });
+            return row;
+        });
+    }
+
+    /**
+     * Abre la vista PlantaView con los detalles de la planta seleccionada.
+     */
+    private void abrirDetallesPlanta(Planta planta) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mijardin/PlantasView.fxml"));
+            loader.setControllerFactory(param -> new PlantaController(plantaService)); // Inyecta el servicio
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(loader.load(), 900, 400);
+            scene.getStylesheets().add(getClass().getResource("/com/mijardin/css/plantlist.css").toExternalForm());
+            stage.setScene(scene);
+            stage.setTitle("Detalles de la Planta");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

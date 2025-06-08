@@ -8,13 +8,13 @@
         <HBox spacing="10" style="-fx-background-color: #e6f4ef; -fx-padding: 10;">
             <HBox spacing="10">
                 <Label text="🌱" style="-fx-font-size: 24px;" />
-                <Label text="Plant Manager" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+                <Label text="Mi Jardin" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
             </HBox>
             <HBox spacing="20" alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
-                <Hyperlink text="Dashboard" />
-                <Hyperlink text="Plants" />
-                <Hyperlink text="Tasks" />
-                <Hyperlink text="Settings" />
+                <Hyperlink text="Inicio" />
+                <Hyperlink text="Plantas" />
+                <Hyperlink text="Tareas" />
+                <Hyperlink text="Configuración" />
             </HBox>
         </HBox>
     </top>
@@ -23,26 +23,26 @@
             <Label text="Dashboard" style="-fx-font-size: 32px; -fx-font-weight: bold;" />
             <HBox spacing="20">
                 <VBox spacing="10" style="-fx-background-color: #e6f4ef; -fx-padding: 20; -fx-border-radius: 10; -fx-background-radius: 10;">
-                    <Label text="Plants Needing Watering Today" style="-fx-font-size: 14px;" />
+                    <Label text="Regar hoy" style="-fx-font-size: 14px;" />
                     <Label fx:id="plantsNeedingWateringLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
                 </VBox>
                 <VBox spacing="10" style="-fx-background-color: #e6f4ef; -fx-padding: 20; -fx-border-radius: 10; -fx-background-radius: 10;">
-                    <Label text="Plants Needing Fertilization Today" style="-fx-font-size: 14px;" />
+                    <Label text="Fertilizar hoy" style="-fx-font-size: 14px;" />
                     <Label fx:id="plantsNeedingFertilizationLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
                 </VBox>
             </HBox>
-            <Label text="Upcoming Watering" style="-fx-font-size: 22px; -fx-font-weight: bold;" />
+            <Label text="Próximos riegos" style="-fx-font-size: 22px; -fx-font-weight: bold;" />
             <TableView fx:id="wateringTable" style="-fx-background-color: #f8fcfa;">
                 <columns>
-                    <TableColumn fx:id="wateringPlantNameColumn" text="Plant Name" />
-                    <TableColumn fx:id="wateringDateColumn" text="Watering Date" />
+                    <TableColumn fx:id="wateringPlantNameColumn" text="Planta" />
+                    <TableColumn fx:id="wateringDateColumn" text="Fecha de riego" />
                 </columns>
             </TableView>
-            <Label text="Upcoming Fertilization" style="-fx-font-size: 22px; -fx-font-weight: bold;" />
+            <Label text="Próximas fertilizaciones" style="-fx-font-size: 22px; -fx-font-weight: bold;" />
             <TableView fx:id="fertilizationTable" style="-fx-background-color: #f8fcfa;">
                 <columns>
-                    <TableColumn fx:id="fertilizationPlantNameColumn" text="Plant Name" />
-                    <TableColumn fx:id="fertilizationDateColumn" text="Fertilization Date" />
+                    <TableColumn fx:id="fertilizationPlantNameColumn" text="Planta" />
+                    <TableColumn fx:id="fertilizationDateColumn" text="Fecha de fertilización" />
                 </columns>
             </TableView>
         </VBox>

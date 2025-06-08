@@ -153,14 +153,14 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>com.mijardin.HelloApplication</mainClass>
+                    <mainClass>com.mijardin.MainApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.mijardin/com.mijardin.HelloApplication</mainClass>
+                            <mainClass>com.mijardin/com.mijardin.MainApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
